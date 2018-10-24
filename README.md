@@ -1,2 +1,1 @@
-# sel-23- 1 change 
-neudachnoe izmenenie
+# sel-23- 1 change
