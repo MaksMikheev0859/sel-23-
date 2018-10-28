@@ -1,24 +1,18 @@
-var webdriver = require('selenium-webdriver'),
-	By = webdriver.By,
-	until = webdriver.until,
-	test = require('selenium-webdriver/testing');
 
-  test.describe = ('admin login', function() {
-	  var driver;
-	  
-	test.before(function() {
-		driver = new webdriver.Builder()
-		.forBrowser('chrome')	
-	    .build();
-	});
+const {Builder, By, Key, until} = require('selenium-webdriver');
 
-	test.it('login', function() {
-     driver.get('http://localhost/litecart/admin/login');
-	 driver.findElement(By.name('username')).sendKeys('admin');
-	 driver.findElement(By.name('password')).sendKeys('admin');
+describe('Login Admin', function() {
+    let driver;
+
+    before(async function() {
+        driver = await new Builder().forBrowser('firefox').build();
     });
-	
-	test.after(function() {
-	  driver.quit();
-	});
-  });	
+
+    it ('login', async function() {
+        driver.get('http://localhost/litecart/admin/login.php?redirect_url=%2Flitecart%2Fadmin%2F');
+        driver.findElement(By.name('username')).sendKeys('admin');
+        driver.findElement(By.name('password')).sendKeys('admin');
+        driver.findElement(By.name('login')).click();
+    });
+    after(async function() {driver.quit();});
+});
